@@ -41,6 +41,7 @@ let sfCharacters = [
 
 // Selectors
 const profilePhoto = document.getElementsByClassName("profile-photo")[0];
+const gameboard = document.getElementsByClassName("gameboard")[0];
 
 // Functions
 const getRandomInt = (max) => {
@@ -50,6 +51,7 @@ const playSound = (file) => {
   let audioPlayer = new Audio();
   audioPlayer.src = `assets/audio/${file}.ogg`;
   audioPlayer.play();
+  // does this really work?
   // audioPlayer.onended = () => {
   //   audioPlayer.pause();
   //   audioPlayer.currentTime = 0;
@@ -63,13 +65,17 @@ const renderImage = (player) => {
 // onload
 document.addEventListener("DOMContentLoaded", () => {
   let selectedCharacter = sfCharacters[getRandomInt(sfCharacters.length)];
-  // let selectedCharacter = sfCharacters[0];
-  
+  let arr = [...selectedCharacter["name"]];
+  console.log(arr);
+
+  arr.forEach(char => {
+    gameboard.innerHTML += `<span class="letter">–</span>`;
+  });
+
   document.onkeypress = (event) => {
-    if (event.key === "a") {
+    if (event.key === "Enter") {
       playSound(selectedCharacter.sound);
       renderImage(selectedCharacter.name);
     }
   }
-  console.log(`selected character => ${selectedCharacter.name}`);
 });
