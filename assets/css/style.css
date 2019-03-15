@@ -55,6 +55,7 @@ body {
   font-family: "VT323", monospace;
   margin: .25em 0 .25em .18em;
   padding: .5em;
+  text-transform: uppercase;
 }
 .letter:first-child {
   margin-left: 0;

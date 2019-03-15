@@ -1,6 +1,5 @@
 // TODO
-// - research game mechanics
-// - swap _ to guessed letter when guessed correctly
+// - score counter
 // - start a new round
 
 // Arrays
@@ -73,16 +72,25 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedCharacter = sfCharacters[getRandomInt(sfCharacters.length)];
   let arr = [...selectedCharacter["name"]];
   arr.forEach(char => {
-    gameboard.innerHTML += `<span class="letter">_</span>`;
+    gameboard.innerHTML += `<span class="letter" data-letter="${char}">_</span>`;
   });
+  let targetLetters = document.querySelectorAll("span[data-letter]");
+  targetLetters.forEach(targetLetter => {
+    console.log(targetLetter.attributes[1].value);
+  });
+  // check
+  // console.log(arr, targetLetters);
+  
   // onkeypress
   document.onkeydown = (event) => {
     let guess = event.key;
-    if (isAlpha(guess)) {
-      console.log(`guess => ${guess}`);
-      console.log(`arr => ${arr}`);
-      // console.log(`selectedCharacter => ${selectedCharacter["name"]}`);
-      // console.log(`guesses => ${guesses}`);
+    if (isAlpha(guess) && arr.indexOf(guess[0]) !== -1) {
+      targetLetters.forEach(targetLetter => {
+        targetLetterAttrs = targetLetter.attributes;
+        if (guess === targetLetterAttrs[1].value) {
+          targetLetter.textContent = guess;
+        }
+      });
     }
     // for debugging purposes only
     if (event.key === "Enter") {
