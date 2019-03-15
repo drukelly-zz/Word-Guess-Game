@@ -39,6 +39,47 @@ body {
   z-index: 20;
 }
 
+.scoreboard {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 1em;
+  position: relative;
+  z-index: 40;
+}
+
+.player-hp,
+.cpu-hp {
+  background-color: #f5f706;
+  border: 3px solid #fff;
+  border-radius: 6px;
+  height: 40px;
+  width: 100%;
+}
+.player-hp div,
+.cpu-hp div {
+  background-color: rgba(255, 0, 0, .75);
+  display: inline-block;
+  height: 100%;
+}
+
+.vs {
+  background: url("../../assets/images/versus.png") no-repeat center center;
+  background-size: contain;
+  width: 160px;
+}
+
+.hp-10 { width: 10% }
+.hp-20 { width: 20% }
+.hp-30 { width: 30% }
+.hp-40 { width: 40% }
+.hp-50 { width: 50% }
+.hp-60 { width: 60% }
+.hp-70 { width: 70% }
+.hp-80 { width: 80% }
+.hp-90 { width: 90% }
+.hp-100 { width: 100% }
+
 .gameboard {
   align-content: center;
   background-color: #3c4043;
@@ -55,6 +96,7 @@ body {
   font-family: "VT323", monospace;
   margin: .25em 0 .25em .18em;
   padding: .5em;
+  text-transform: uppercase;
 }
 .letter:first-child {
   margin-left: 0;
@@ -62,6 +104,6 @@ body {
 
 .question {
   position: relative;
-  top: -100px;
+  top: -180px;
   width: 256px;
 }
