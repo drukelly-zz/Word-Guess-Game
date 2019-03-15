@@ -1,9 +1,9 @@
 // TODO
 // - research game mechanics
 // - swap _ to guessed letter when guessed correctly
-// - play sound when entire word is complete
 // - start a new round
 
+// Arrays
 let sfCharacters = [
   {
     "name"  : "ryu",
@@ -38,12 +38,18 @@ let sfCharacters = [
     "sound" : "yoga-fire"
   }
 ];
+const guesses = [];
 
 // Selectors
 const profilePhoto = document.getElementsByClassName("profile-photo")[0];
 const gameboard = document.getElementsByClassName("gameboard")[0];
 
 // Functions
+const isAlpha = (letter) => {
+  if (letter.match(/^[A-Za-z]+$/) || letter === " " || letter === "." || letter === "-") {
+    return true;
+  }
+}
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -57,8 +63,8 @@ const playSound = (file) => {
   //   audioPlayer.currentTime = 0;
   // }
 }
-const renderImage = (player) => {
-  profilePhoto.innerHTML = `<img src="assets/images/${player.replace(" ", "-")}.gif" alt="" class="img-fluid">`;
+const renderImages = (player) => {
+  profilePhoto.innerHTML = `<img src="assets/images/${player.replace(" ", "-")}.gif" alt="">`;
 }
 
 // Events
@@ -66,16 +72,23 @@ const renderImage = (player) => {
 document.addEventListener("DOMContentLoaded", () => {
   let selectedCharacter = sfCharacters[getRandomInt(sfCharacters.length)];
   let arr = [...selectedCharacter["name"]];
-  console.log(arr);
-
   arr.forEach(char => {
-    gameboard.innerHTML += `<span class="letter">–</span>`;
+    gameboard.innerHTML += `<span class="letter">_</span>`;
   });
-
-  document.onkeypress = (event) => {
+  // onkeypress
+  document.onkeydown = (event) => {
+    let guess = event.key;
+    if (isAlpha(guess)) {
+      console.log(`guess => ${guess}`);
+      console.log(`arr => ${arr}`);
+      // console.log(`selectedCharacter => ${selectedCharacter["name"]}`);
+      // console.log(`guesses => ${guesses}`);
+    }
+    // for debugging purposes only
     if (event.key === "Enter") {
+      console.log(arr);
       playSound(selectedCharacter.sound);
-      renderImage(selectedCharacter.name);
+      renderImages(selectedCharacter.name);
     }
   }
 });

@@ -19,24 +19,38 @@ body {
   flex: 1 0 auto;
 }
 
+.backdrop {
+  background: url("../../assets/images/stage.jpg") no-repeat center -140px;
+  background-size: cover;
+  height: 100vh;
+  left: 0;
+  opacity: .33;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+}
+
 .profile-photo {
   position: relative;
   text-align: center;
-  top: 50%;
+  top: 68%;
   transform: translateY(-50%);
+  z-index: 20;
 }
 
 .gameboard {
   align-content: center;
   background-color: #3c4043;
-  border-top: 12px solid #323639;
   display: flex;
-  height: 180px;
   justify-content: center;
+  position: relative;
+  z-index: 30;
 }
 
 .letter {
   background-color: #fff;
+  display: inline-block;
   font-size: 4rem;
   font-family: "VT323", monospace;
   margin: .25em 0 .25em .18em;
@@ -47,5 +61,7 @@ body {
 }
 
 .question {
+  position: relative;
+  top: -100px;
   width: 256px;
 }
