@@ -35,6 +35,26 @@ let sfCharacters = [
   {
     "name"  : "dhalsim",
     "sound" : "yoga-fire"
+  },
+  {
+    "name"  : "balrog",
+    "sound" : ""
+  },
+  {
+    "name"  : "vega",
+    "sound" : "wall-dive"
+  },
+  {
+    "name"  : "sagat",
+    "sound" : "tiger-uppercut"
+  },
+  {
+    "name"  : "m. bison",
+    "sound" : ""
+  },
+  {
+    "name"  : "akuma",
+    "sound" : ""
   }
 ];
 const guesses = [];
@@ -62,6 +82,8 @@ const playSound = (file) => {
   //   audioPlayer.currentTime = 0;
   // }
 }
+const playNoSound = () => { }
+
 const renderImages = (player) => {
   profilePhoto.innerHTML = `<img src="assets/images/${player.replace(" ", "-")}.gif" alt="">`;
 }
@@ -72,11 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedCharacter = sfCharacters[getRandomInt(sfCharacters.length)];
   let arr = [...selectedCharacter["name"]];
   arr.forEach(char => {
-    gameboard.innerHTML += `<span class="letter" data-letter="${char}">_</span>`;
-  });
-  let targetLetters = document.querySelectorAll("span[data-letter]");
-  targetLetters.forEach(targetLetter => {
-    console.log(targetLetter.attributes[1].value);
+    gameboard.innerHTML += `<span class="letter letter-inactive" data-letter="${char}">_</span>`;
   });
   let targetLetters = document.querySelectorAll("span[data-letter]");
   targetLetters.forEach(targetLetter => {
@@ -93,13 +111,14 @@ document.addEventListener("DOMContentLoaded", () => {
         targetLetterAttrs = targetLetter.attributes;
         if (guess === targetLetterAttrs[1].value) {
           targetLetter.textContent = guess;
+          targetLetter.classList.remove("letter-inactive");
         }
       });
     }
-    // for debugging purposes only
+    // for debugging purposes
     if (event.key === "Enter") {
       console.log(arr);
-      playSound(selectedCharacter.sound);
+      (!selectedCharacter.sound) ? playNoSound() : playSound(selectedCharacter.sound);
       renderImages(selectedCharacter.name);
     }
   }

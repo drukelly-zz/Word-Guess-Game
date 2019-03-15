@@ -8,11 +8,7 @@ body {
 }
 
 body {
-  align-content: stretch;
   background-color: #282c2f;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .content {
@@ -20,7 +16,7 @@ body {
 }
 
 .backdrop {
-  background: url("../../assets/images/stage.jpg") no-repeat center -140px;
+  background: url("../../assets/images/stage.jpg") no-repeat center -160px;
   background-size: cover;
   height: 100vh;
   left: 0;
@@ -34,16 +30,13 @@ body {
 .profile-photo {
   position: relative;
   text-align: center;
-  top: 68%;
+  top: 45%;
   transform: translateY(-50%);
   z-index: 20;
 }
 
 .scoreboard {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  margin: 1em;
+  margin: 1em 1.5em;
   position: relative;
   z-index: 40;
 }
@@ -63,10 +56,16 @@ body {
   height: 100%;
 }
 
-.vs {
-  background: url("../../assets/images/versus.png") no-repeat center center;
-  background-size: contain;
-  width: 160px;
+.ko {
+  color: #fff;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: -4pt;
+  position: relative;
+  text-align: center;
+  text-shadow: 3px 3px 0 black;
+  top: -3px;
+  width: 192px;
 }
 
 .hp-10 { width: 10% }
@@ -81,19 +80,16 @@ body {
 .hp-100 { width: 100% }
 
 .gameboard {
-  align-content: center;
   background-color: #3c4043;
-  display: flex;
-  justify-content: center;
   position: relative;
   z-index: 30;
 }
 
 .letter {
-  background-color: #fff;
+  background-color: #ccc;
+  color: #333;
   display: inline-block;
-  font-size: 4rem;
-  font-family: "VT323", monospace;
+  font: 4rem/1 "VT323", monospace;
   margin: .25em 0 .25em .18em;
   padding: .5em;
   text-transform: uppercase;
@@ -101,9 +97,24 @@ body {
 .letter:first-child {
   margin-left: 0;
 }
+.letter-inactive {
+  background-color: rgba(0, 0, 0, .5);
+  color: #fff;
+}
 
 .question {
   position: relative;
-  top: -180px;
+  top: -64px;
   width: 256px;
+}
+
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.align-justify-center {
+  align-content: center;
+  justify-content: center;
 }
