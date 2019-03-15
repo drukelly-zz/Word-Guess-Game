@@ -78,6 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
   targetLetters.forEach(targetLetter => {
     console.log(targetLetter.attributes[1].value);
   });
+  let targetLetters = document.querySelectorAll("span[data-letter]");
+  targetLetters.forEach(targetLetter => {
+    console.log(targetLetter.attributes[1].value);
+  });
+  // check
+  // console.log(arr, targetLetters);
+  
   // onkeypress
   document.onkeydown = (event) => {
     let guess = event.key;
