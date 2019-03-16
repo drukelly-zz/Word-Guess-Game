@@ -68,6 +68,8 @@ body {
   background-color: rgba(255, 0, 0, .75);
   display: inline-block;
   height: 100%;
+  transition: width 0.3s ease-out;
+  width: 0%;
 }
 .cpu-hp div {
   position: absolute;
@@ -94,8 +96,8 @@ body {
 }
 
 .letter {
-  background-color: #ccc;
-  color: #333;
+  background-color: rgba(0, 0, 0, .5);
+  color: #fff;
   display: inline-block;
   font: 4rem/1 "VT323", monospace;
   margin: .25em 0 .25em .18em;
@@ -105,12 +107,13 @@ body {
 .letter:first-child {
   margin-left: 0;
 }
-.letter-inactive {
-  background-color: rgba(0, 0, 0, .5);
-  color: #fff;
+.letter-active {
+  background-color: #ccc;
+  color: #333;
 }
 
 .question {
+  animation: up-and-down 1s alternate infinite ease-in-out;
   position: relative;
   top: -64px;
   width: 256px;
