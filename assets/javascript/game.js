@@ -124,13 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (guess === targetLetterAttrs[1].value) {
           targetLetter.textContent = guess;
           targetLetter.classList.remove("letter-inactive");
-          cpuHP.style.width = `${perHitDamage}%`
+          cpuHP.style.width = `${arr.length * perHitDamage}%`
         }
       });
     } else {
       // losing logic
       --user["chances"];
-      console.log()
+      guesses.push(event.key);
+      console.log(guesses.length * perHitDamage);
       // guesses.push(guess);
       playerHP.style.width = `${perHitDamage}%`;
       if (user["score"] === 10) {
