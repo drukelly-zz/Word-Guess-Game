@@ -61,6 +61,7 @@ let sfCharacters = [
 ];
 let guesses = [];
 let user = {
+  "chances" : 0,
   "score" : 0
 }
 let cpu = {
@@ -75,9 +76,6 @@ const cpuHP = document.getElementsByClassName("cpu-hp")[0].firstElementChild;
 // Functions
 const displayModal = (message) => {
   console.log(message);
-}
-const inflictDamage = (whichPlayer, damage) => {
-  document.getElementsByClassName(`${whichPlayer}`)[0].firstElementChild.style.width = `${damage}px`;
 }
 const isAlpha = (letter) => {
   if (letter.match(/^[A-Za-z]+$/) || letter === " " || letter === "." || letter === "-") {
@@ -114,9 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
     gameboard.innerHTML += `<span class="letter letter-inactive" data-letter="${char}">_</span>`;
   });
   let targetLetters = document.querySelectorAll("span[data-letter]");
-  // check
-  // console.log(arr, targetLetters);
-  
+  let perHitDamage = Math.round(100 / arr.length);
+  user["chances"] = arr.length;
+  console.log(`per hit => ${perHitDamage}%,`, "chances => " + user["chances"]);
   // onkeypress
   document.onkeydown = (event) => {
     let guess = event.key;
@@ -126,20 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (guess === targetLetterAttrs[1].value) {
           targetLetter.textContent = guess;
           targetLetter.classList.remove("letter-inactive");
+          cpuHP.style.width = `${perHitDamage}%`
         }
       });
-      // 
-      // runs out of guesses
-      if (user["score"] === 10) {
-        displayModal("you win");
-      }
-      if (cpu["score"] === 10) {
-        displayModal("you lose");
-      }
     } else {
       // losing logic
-      guesses.push(guess);
-      console.log("wrong!");
+      --user["chances"];
+      console.log()
+      // guesses.push(guess);
+      playerHP.style.width = `${perHitDamage}%`;
+      if (user["score"] === 10) {
+        displayModal("you win");
+        nextRound();
+      }
+      // runs out of guesses
+      if (user["chances"] === 0) {
+        displayModal("you lose");
+        nextRound();
+      }
     }
     // for debugging purposes
     if (event.key === "Enter") {

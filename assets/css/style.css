@@ -5,6 +5,7 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -36,11 +37,15 @@ body {
 }
 
 .scoreboard {
-  margin: 1em 1.5em;
+  margin: 2em 1.5em 1em;
   position: relative;
   z-index: 40;
 }
 
+.hp {
+  position: relative;
+  overflow: hidden;
+}
 .player-hp,
 .cpu-hp {
   background-color: #f5f706;
@@ -54,6 +59,12 @@ body {
   background-color: rgba(255, 0, 0, .75);
   display: inline-block;
   height: 100%;
+  height: 34px;
+}
+.cpu-hp div {
+  position: absolute;
+  right: 0;
+  transform: rotateX(180deg);
 }
 
 .ko {
@@ -67,17 +78,6 @@ body {
   top: -3px;
   width: 192px;
 }
-
-.hp-10 { width: 10% }
-.hp-20 { width: 20% }
-.hp-30 { width: 30% }
-.hp-40 { width: 40% }
-.hp-50 { width: 50% }
-.hp-60 { width: 60% }
-.hp-70 { width: 70% }
-.hp-80 { width: 80% }
-.hp-90 { width: 90% }
-.hp-100 { width: 100% }
 
 .gameboard {
   background-color: #3c4043;
