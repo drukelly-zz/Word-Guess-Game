@@ -90,7 +90,7 @@ body {
 }
 
 .gameboard {
-  background-color: #3c4043;
+  background-color: #111;
   position: relative;
   z-index: 30;
 }
@@ -110,6 +110,17 @@ body {
 .letter-active {
   background-color: #ccc;
   color: #333;
+}
+
+.result {
+  position: fixed;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+}
+.result img {
+  margin-top: 2em;
 }
 
 .question {
