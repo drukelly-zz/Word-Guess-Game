@@ -53,6 +53,7 @@ let sfCharacters = [
     "sound" : ""
   }
 ];
+let hitSounds = ["hit1", "hit2", "hit3", "hit4", "hit5"];
 let wrongGuesses = [];
 // Selectors
 const profilePhoto = document.getElementsByClassName("profile-photo")[0];
@@ -110,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // onkeypress
   document.onkeydown = (event) => {
     let guess = event.key;
+    playSound(hitSounds[getRandomInt(hitSounds.length)], "play");
     if (isAlpha(guess) && selectedCharacter["name"].indexOf(guess) !== -1) {
       targetLetters.forEach(targetLetter => {
         targetLetterAttrs = targetLetter.attributes;
