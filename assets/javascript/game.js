@@ -1,8 +1,10 @@
 // TODO
-// - score counter
+// - hp
 // - start a new round
+// - background sound
+// - modal
 
-// Arrays
+// Arrays and Variables
 let sfCharacters = [
   {
     "name"  : "ryu",
@@ -57,13 +59,26 @@ let sfCharacters = [
     "sound" : ""
   }
 ];
-const guesses = [];
-
+let guesses = [];
+let user = {
+  "score" : 0
+}
+let cpu = {
+  "score" : 0
+}
 // Selectors
 const profilePhoto = document.getElementsByClassName("profile-photo")[0];
 const gameboard = document.getElementsByClassName("gameboard")[0];
+const playerHP = document.getElementsByClassName("player-hp")[0].firstElementChild;
+const cpuHP = document.getElementsByClassName("cpu-hp")[0].firstElementChild;
 
 // Functions
+const displayModal = (message) => {
+  console.log(message);
+}
+const inflictDamage = (whichPlayer, damage) => {
+  document.getElementsByClassName(`${whichPlayer}`)[0].firstElementChild.style.width = `${damage}px`;
+}
 const isAlpha = (letter) => {
   if (letter.match(/^[A-Za-z]+$/) || letter === " " || letter === "." || letter === "-") {
     return true;
@@ -72,19 +87,21 @@ const isAlpha = (letter) => {
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
-const playSound = (file) => {
+const nextRound = () => {
+
+}
+const playSound = (file, state) => {
   let audioPlayer = new Audio();
   audioPlayer.src = `assets/audio/${file}.ogg`;
-  audioPlayer.play();
-  // does this really work?
-  // audioPlayer.onended = () => {
-  //   audioPlayer.pause();
-  //   audioPlayer.currentTime = 0;
-  // }
+  if (state === "pause") {
+    audioPlayer.pause();
+  }
+  (state === "play") ? audioPlayer.play() : audioPlayer.stop()
 }
-const playNoSound = () => { }
-
-const renderImages = (player) => {
+const playNoSound = () => {
+  // nothing going on here
+}
+const renderImage = (player) => {
   profilePhoto.innerHTML = `<img src="assets/images/${player.replace(" ", "-")}.gif" alt="">`;
 }
 
@@ -97,9 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     gameboard.innerHTML += `<span class="letter letter-inactive" data-letter="${char}">_</span>`;
   });
   let targetLetters = document.querySelectorAll("span[data-letter]");
-  targetLetters.forEach(targetLetter => {
-    console.log(targetLetter.attributes[1].value);
-  });
   // check
   // console.log(arr, targetLetters);
   
@@ -114,12 +128,24 @@ document.addEventListener("DOMContentLoaded", () => {
           targetLetter.classList.remove("letter-inactive");
         }
       });
+      // 
+      // runs out of guesses
+      if (user["score"] === 10) {
+        displayModal("you win");
+      }
+      if (cpu["score"] === 10) {
+        displayModal("you lose");
+      }
+    } else {
+      // losing logic
+      guesses.push(guess);
+      console.log("wrong!");
     }
     // for debugging purposes
     if (event.key === "Enter") {
       console.log(arr);
-      (!selectedCharacter.sound) ? playNoSound() : playSound(selectedCharacter.sound);
-      renderImages(selectedCharacter.name);
+      (!selectedCharacter.sound) ? playNoSound() : playSound(selectedCharacter.sound, "play");
+      renderImage(selectedCharacter.name);
     }
   }
 });
